@@ -21,6 +21,9 @@ DATA_CATALOGS = {
   #'data.gov': {
   #  'url':	'http://catalog.data.gov/api/'
   #},
+  'data.gv.at': {
+    'url':	'http://www.data.gv.at/katalog/api/'
+  },
   'data.gov.cz': {
     'url':	'http://cz.ckan.net/api/'
   },
