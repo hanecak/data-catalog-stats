@@ -66,7 +66,7 @@ class CkanApiV1Extractor:
     license_data = {}
     
     print "source\tdataset_count\tresource_count\tlicense_count(total)\topen_license_count\tnon_open_license_count"
-    for source_name in DATA_CATALOGS.keys():
+    for source_name in sorted(DATA_CATALOGS.keys()):
       # check API version
       data = self._make_request(DATA_CATALOGS[source_name]['url'], "1")
       if data['version'] != 1:
