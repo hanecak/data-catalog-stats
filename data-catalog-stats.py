@@ -7,7 +7,7 @@
 # 2) web app + scheduling - so that it can be deployed and periodically launches on its own
 # 3) GUI with tables and graphs
 # 4) more data sources
-# 5) Socrata loader for even more data sources (sites like https://opendata.go.ke/ or https://data.sfgov.org/)
+# 5) Socrata loader for even more data sources (sites like https://opendata.go.ke/, https://data.sfgov.org/, https://data.cityofchicago.org/, etc.)
 
 import datetime
 import json
