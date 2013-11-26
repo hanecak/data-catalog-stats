@@ -23,19 +23,22 @@ DATA_CATALOGS = {
   #  'url':	'http://catalog.data.gov/api/'
   #},
   'data.gv.at': {
-    'url':	'http://www.data.gv.at/katalog/api/'
+    'url': 'http://www.data.gv.at/katalog/api/'
   },
   #'data.gov.au': {
-  #  'url':	'http://data.gov.au/api/'
+  #  'url': 'http://data.gov.au/api/'
   #},
   'data.gov.cz': {
-    'url':	'http://cz.ckan.net/api/'
+    'url': 'http://cz.ckan.net/api/'
   },
   'data.gov.sk': {
-    'url':	'http://data.gov.sk/sk/api/'
+    'url': 'http://data.gov.sk/sk/api/'
   },
   'data.gov.uk': {
-    'url':	'http://data.gov.uk/api/'
+    'url': 'http://data.gov.uk/api/'
+  },
+  'www.opendatahub.it': {
+    'url': 'http://www.opendatahub.it/api/'
   }
 }
 
