@@ -37,8 +37,8 @@ DATA_CATALOGS = {
   'data.gov.uk': {
     'url': 'http://data.gov.uk/api/'
   },
-  'www.opendatahub.it': {
-    'url': 'http://www.opendatahub.it/api/'
+  'www.dati.gov.it': {
+    'url': 'http://www.dati.gov.it/catalog/api/'
   }
 }
 
