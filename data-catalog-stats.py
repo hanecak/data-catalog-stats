@@ -3,11 +3,13 @@
 # Simple stat gathering tool from some selected data catalogs.
 #
 # TODO:
-# 1) better persistence (SQLite, PostgreSQL, ...)
-# 2) web app + scheduling - so that it can be deployed and periodically launches on its own
-# 3) GUI with tables and graphs
-# 4) more data sources
-# 5) Socrata loader for even more data sources (sites like https://opendata.go.ke/, https://data.sfgov.org/, https://data.cityofchicago.org/, etc.)
+# 1) CSV results pushed into GitHub: one siple CSV with "current" data (i.e. reformated data-catalog-stats.out) plus "complete data" (i.e. reformated data-catalog-stats.state) pushed to GitHub
+#    (GitHub will allow others to pull, with revisines/hostory and also do some visualizations for tha data)
+# 2) better persistence (SQLite, PostgreSQL, ...)
+# 3) web app + scheduling - so that it can be deployed and periodically launches on its own
+# 4) GUI with tables and graphs
+# 5) more data sources
+# 6) Socrata loader for even more data sources (sites like https://opendata.go.ke/, https://data.sfgov.org/, https://data.cityofchicago.org/, etc.)
 
 import datetime
 import json
