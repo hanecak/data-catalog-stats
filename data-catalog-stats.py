@@ -3,8 +3,8 @@
 # Simple stat gathering tool from some selected data catalogs.
 #
 # TODO:
-# 1) CSV results pushed into GitHub: one siple CSV with "current" data (i.e. reformated data-catalog-stats.out) plus "complete data" (i.e. reformated data-catalog-stats.state) pushed to GitHub
-#    (GitHub will allow others to pull, with revisines/hostory and also do some visualizations for tha data)
+# 1) CSV results pushed into GitHub: one simple CSV with "current" data (i.e. reformatted data-catalog-stats.out) plus "complete data" (i.e. reformatted data-catalog-stats.state) pushed to GitHub
+#    (GitHub will allow others to pull, with revisions/history and also do some visualizations for the data)
 # 2) better persistence (SQLite, PostgreSQL, ...)
 # 3) web app + scheduling - so that it can be deployed and periodically launches on its own
 # 4) GUI with tables and graphs
@@ -174,10 +174,10 @@ class DataCatalogStats:
 
 
   def update_data(self):
-    # get current data sampla
+    # get current data sample
     self.current_data = self.ckan_api_v1_extractor.get_data()
     
-    # we're going to storeone sample per day => construct the key
+    # we're going to store one sample per day => construct the key
     sample_key = datetime.date.today().strftime('%Y%m%d')
     self.state[sample_key] = self.current_data
     
