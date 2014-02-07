@@ -46,6 +46,8 @@ DATA_CATALOGS = {
 
 STATE_FILE = 'data-catalog-stats.state'
 
+COLUMN_NAMES = [ "source", "dataset_count", "resource_count", "license_count(total)", "open_license_count", "non_open_license_count" ]
+
 
 stats = [
 #  DatasetsPerCatalog,
@@ -74,7 +76,13 @@ class CkanApiV1Extractor:
     dataset_data = {}
     license_data = {}
     
-    print "source\tdataset_count\tresource_count\tlicense_count(total)\topen_license_count\tnon_open_license_count"
+    col_names = ''
+    for col_name in COLUMN_NAMES:
+      col_names += col_name + "\t"
+    # strip last "\t"
+    col_name = col_name[:-1]
+    print col_names
+    
     for source_name in sorted(DATA_CATALOGS.keys()):
       # check API version
       data = self._make_request(DATA_CATALOGS[source_name]['url'], "1")
@@ -126,6 +134,7 @@ class DataCatalogStats:
 
   def __init__(self):
     self.state = {}
+    self.current_data = ();
     self.ckan_api_v1_extractor = CkanApiV1Extractor()
   
 
@@ -138,13 +147,35 @@ class DataCatalogStats:
     self.state = pickle.load(state_file);
   
   
+  def save_csv_current(self):
+    """save current values into CSV"""
+    
+    import csv
+    
+    with open('data-catalog-stats-current.csv', 'wb') as csvfile:
+      csvwriter = csv.writer(csvfile)
+      csvwriter.writerow(COLUMN_NAMES)
+      
+      (dataset_data, license_data) = self.current_data
+      
+      for source_name in sorted(DATA_CATALOGS.keys()):
+        csvwriter.writerow([
+          source_name,
+          dataset_data[source_name]['dataset_count'],
+          dataset_data[source_name]['resource_count'],
+          dataset_data[source_name]['license_count'],
+          license_data[source_name]['open_count'],
+          license_data[source_name]['non_open_count']
+        ])
+
+
   def update_data(self):
     # get current data sampla
-    current_data = self.ckan_api_v1_extractor.get_data()
+    self.current_data = self.ckan_api_v1_extractor.get_data()
     
     # we're going to storeone sample per day => construct the key
     sample_key = datetime.date.today().strftime('%Y%m%d')
-    self.state[sample_key] = current_data
+    self.state[sample_key] = self.current_data
     
     #print 'self.state:'
     #print `self.state`
@@ -161,4 +192,5 @@ class DataCatalogStats:
 data_catalog_stats = DataCatalogStats()
 data_catalog_stats.load_state()
 data_catalog_stats.update_data()
+data_catalog_stats.save_csv_current()
 data_catalog_stats.save_state()
