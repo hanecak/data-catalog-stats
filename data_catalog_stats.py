@@ -58,7 +58,7 @@ stats = [
 
 class CkanApiV1Extractor:
 
-  def _make_request(self, base_url, resource, args = None):
+  def _make_request(self, base_url, resource, args=None):
     """
     wrapper for rest client and json libraries
     """
@@ -96,7 +96,7 @@ class CkanApiV1Extractor:
 
       # get the dataset count
       data = self._make_request(DATA_CATALOGS[source_name]['url'], "rest/dataset");
-      #print `data`
+      # print `data`
       dataset_data[source_name]['dataset_count'] = len(data)
       temp_dataset_count = len(data)
 
@@ -124,10 +124,10 @@ class CkanApiV1Extractor:
           license_data[source_name]['non_open_count']
         )
     
-    #print('dataset_data:')
-    #print `dataset_data`
-    #print('license_data:')
-    #print `license_data`
+    # print('dataset_data:')
+    # print `dataset_data`
+    # print('license_data:')
+    # print `license_data`
     
     return (dataset_data, license_data)
 
@@ -181,8 +181,8 @@ class DataCatalogStats:
     sample_key = datetime.date.today().strftime('%Y%m%d')
     self.state[sample_key] = self.current_data
     
-    #print 'self.state:'
-    #print `self.state`
+    # print 'self.state:'
+    # print `self.state`
 
 
   def save_state(self):
@@ -190,9 +190,9 @@ class DataCatalogStats:
     pickle.dump(self.state, state_file);
 
 
-###
-### main
-###
+#
+# main
+#
 data_catalog_stats = DataCatalogStats()
 data_catalog_stats.load_state()
 data_catalog_stats.update_data()
