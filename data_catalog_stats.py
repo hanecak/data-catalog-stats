@@ -140,7 +140,7 @@ class CkanApiV1Extractor:
             # print('license_data:')
             # print `license_data`
             
-            return (dataset_data, license_data)
+        return (dataset_data, license_data)
 
 
 class DataCatalogStats:
