@@ -49,13 +49,6 @@ STATE_FILE = 'data-catalog-stats.state'
 COLUMN_NAMES = [ "source", "dataset_count", "resource_count", "license_count(total)", "open_license_count", "non_open_license_count" ]
 
 
-stats = [
-#  DatasetsPerCatalog,
-#  ResourcesPerCatalog,
-#  LicensePercentagesPerCatalog
-]
-
-
 class CkanApiV1Extractor:
     
     def _make_request(self, base_url, resource, args=None):
@@ -109,7 +102,7 @@ class CkanApiV1Extractor:
             dataset_data[source_name]['license_count'] = len(data)
             
             # get the per-license dataset count
-            # TODO: for now I do not know how to do that without querying all datasets and doind the filtering
+            # TODO: for now I do not know how to do that without querying all datasets and doing the filtering
             # on my own in the code so at least we count open vs. non-open ones
             data = self._make_request(DATA_CATALOGS[source_name]['url'], "search/dataset", args={'q':'isopen:true'});
             license_data[source_name]['open_count'] = data['count']
