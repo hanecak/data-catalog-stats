@@ -173,7 +173,7 @@ class DataCatalogStats:
             
             (dataset_data, license_data) = self.current_data
             
-            for source_name in sorted(DATA_CATALOGS.keys()):
+            for source_name in sorted(dataset_data.keys()):
                 csvwriter.writerow([
                                     source_name,
                                     dataset_data[source_name]['dataset_count'],
