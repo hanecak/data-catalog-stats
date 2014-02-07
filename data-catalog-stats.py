@@ -58,10 +58,11 @@ stats = [
 
 class CkanApiV1Extractor:
 
-  '''
-  wrapper for rest client and json libraries
-  '''
   def _make_request(self, base_url, resource, args = None):
+    """
+    wrapper for rest client and json libraries
+    """
+    
     conn = Connection(base_url)
     # TODO: is "headers" part necessary?
     response = conn.request_get(resource, args, headers={'Accept':'text/json'})
@@ -69,10 +70,11 @@ class CkanApiV1Extractor:
     return data
   
 
-  '''
-  Get the data from the source and put them into 'data' and 'license_data'.
-  '''
   def get_data(self):
+    """
+    Get the data from the source and put them into 'data' and 'license_data'.
+    """
+  
     dataset_data = {}
     license_data = {}
     
@@ -148,7 +150,9 @@ class DataCatalogStats:
   
   
   def save_csv_current(self):
-    """save current values into CSV"""
+    """
+    save current values into CSV
+    """
     
     import csv
     
