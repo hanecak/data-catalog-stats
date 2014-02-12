@@ -37,6 +37,9 @@ from python_rest_client.restful_lib import Connection
 
 
 DATA_CATALOGS = {
+  'catalogodatos.gub.uy': {
+    'url': 'http://catalogodatos.gub.uy/api/'
+  },
   'dados.gov.br': {
     'url': 'http://dados.gov.br/api/'
   },
