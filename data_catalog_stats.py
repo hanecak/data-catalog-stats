@@ -60,6 +60,9 @@ DATA_CATALOGS = {
   'data.gov.uk': {
     'url': 'http://data.gov.uk/api/'
   },
+  'hubofdata.ru': {
+    'url': 'http://hubofdata.ru/api/'
+  },
   'www.dati.gov.it': {
     'url': 'http://www.dati.gov.it/catalog/api/'
   },
