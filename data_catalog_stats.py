@@ -37,6 +37,9 @@ from python_rest_client.restful_lib import Connection
 
 
 DATA_CATALOGS = {
+  'dados.gov.br': {
+    'url': 'http://dados.gov.br/api/'
+  },
   # TODO: taking a long time and then raising:
   #	ValueError: No JSON object could be decoded
   #'data.gov': {
