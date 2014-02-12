@@ -65,6 +65,9 @@ DATA_CATALOGS = {
   },
   'www.govdata.de': {
     'url': 'https://www.govdata.de/ckan/api/'
+  },
+  'www.publicdata.eu': {
+    'url': 'http://www.publicdata.eu/api/'
   }
 }
 
