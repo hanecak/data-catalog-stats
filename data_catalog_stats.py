@@ -63,8 +63,17 @@ DATA_CATALOGS = {
   'data.gov.uk': {
     'url': 'http://data.gov.uk/api/'
   },
+  'datahub.io': {
+    'url': 'http://datahub.io/api/'
+  },
   'hubofdata.ru': {
     'url': 'http://hubofdata.ru/api/'
+  },
+  'ie.ckan.net': {
+    'url': 'http://ie.ckan.net/api/'
+  },
+  'opendata.hu': {
+    'url': 'http://opendata.hu/api/'
   },
   'www.dati.gov.it': {
     'url': 'http://www.dati.gov.it/catalog/api/'
