@@ -43,6 +43,9 @@ DATA_CATALOGS = {
   'dados.gov.br': {
     'url': 'http://dados.gov.br/api/'
   },
+  'data.comsode.eu': {
+    'url': 'http://data.comsode.eu/api/'
+  },
   # TODO: taking a long time and then raising:
   #	ValueError: No JSON object could be decoded
   #'data.gov': {
