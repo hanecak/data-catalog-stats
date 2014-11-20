@@ -57,6 +57,9 @@ DATA_CATALOGS = {
   'data.gov.cz': {
     'url': 'http://cz.ckan.net/api/'
   },
+  'data.gov.ie': {
+    'url': 'http://data.gov.ie/api/'
+  },
   'data.gov.sk': {
     'url': 'http://data.gov.sk/sk/api/'
   },
