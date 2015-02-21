@@ -34,6 +34,8 @@ import json
 import os.path
 import pickle
 from python_rest_client.restful_lib import Connection
+import sys
+import traceback
 
 
 DATA_CATALOGS = {
@@ -127,34 +129,41 @@ class CkanApiV1Extractor:
         print col_names
         
         for source_name in sorted(DATA_CATALOGS.keys()):
-            # check API version
-            data = self._make_request(DATA_CATALOGS[source_name]['url'], "1")
-            if data['version'] != 1:
-                raise Exception('API is not v1: %s' % data['version'])
-            
-            dataset_data[source_name] = {}
-            license_data[source_name] = {}
-            
-            # get the dataset count
-            data = self._make_request(DATA_CATALOGS[source_name]['url'], "rest/dataset");
-            # print `data`
-            dataset_data[source_name]['dataset_count'] = len(data)
-            temp_dataset_count = len(data)
-            
-            # get the resource count
-            data = self._make_request(DATA_CATALOGS[source_name]['url'], "search/resource");
-            dataset_data[source_name]['resource_count'] = data['count']
-            
-            # get the license count
-            data = self._make_request(DATA_CATALOGS[source_name]['url'], "rest/licenses");
-            dataset_data[source_name]['license_count'] = len(data)
-            
-            # get the per-license dataset count
-            # TODO: for now I do not know how to do that without querying all datasets and doing the filtering
-            # on my own in the code so at least we count open vs. non-open ones
-            data = self._make_request(DATA_CATALOGS[source_name]['url'], "search/dataset", args={'q':'isopen:true'});
-            license_data[source_name]['open_count'] = data['count']
-            license_data[source_name]['non_open_count'] = temp_dataset_count - data['count']
+            try:
+                # check API version
+                data = self._make_request(DATA_CATALOGS[source_name]['url'], "1")
+                if data['version'] != 1:
+                    print >> sys.stderr, 'API at %s is not v1: %s' % (source_name, data['version'])
+                    continue
+
+                dataset_data[source_name] = {}
+                license_data[source_name] = {}
+
+                # get the dataset count
+                data = self._make_request(DATA_CATALOGS[source_name]['url'], "rest/dataset");
+                # print `data`
+                dataset_data[source_name]['dataset_count'] = len(data)
+                temp_dataset_count = len(data)
+
+                # get the resource count
+                data = self._make_request(DATA_CATALOGS[source_name]['url'], "search/resource");
+                dataset_data[source_name]['resource_count'] = data['count']
+
+                # get the license count
+                data = self._make_request(DATA_CATALOGS[source_name]['url'], "rest/licenses");
+                dataset_data[source_name]['license_count'] = len(data)
+
+                # get the per-license dataset count
+                # TODO: for now I do not know how to do that without querying all datasets and doing the filtering
+                # on my own in the code so at least we count open vs. non-open ones
+                data = self._make_request(DATA_CATALOGS[source_name]['url'], "search/dataset", args={'q':'isopen:true'});
+                license_data[source_name]['open_count'] = data['count']
+                license_data[source_name]['non_open_count'] = temp_dataset_count - data['count']
+            except:
+                print >> sys.stderr, 'error encountered while fetching data from %s:' % source_name
+                traceback.print_exc(file=sys.stderr)
+                continue
+
             
             print "%s\t%d\t%d\t%d\t%d\t%d" % (
                                               source_name,
