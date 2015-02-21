@@ -129,15 +129,20 @@ class CkanApiV1Extractor:
         print col_names
         
         for source_name in sorted(DATA_CATALOGS.keys()):
+            # fill in default values (-1) in case this (ocasionaly) fails
+            dataset_data[source_name] = {}
+            dataset_data[source_name]['dataset_count'] = -1
+            dataset_data[source_name]['resource_count'] = -1
+            dataset_data[source_name]['license_count'] = -1
+            license_data[source_name] = {}
+            license_data[source_name]['open_count'] = -1
+            license_data[source_name]['non_open_count'] = -1
+
             try:
                 # check API version
                 data = self._make_request(DATA_CATALOGS[source_name]['url'], "1")
                 if data['version'] != 1:
-                    print >> sys.stderr, 'API at %s is not v1: %s' % (source_name, data['version'])
-                    continue
-
-                dataset_data[source_name] = {}
-                license_data[source_name] = {}
+                    raise Exception('API is not v1: %s' % data['version'])
 
                 # get the dataset count
                 data = self._make_request(DATA_CATALOGS[source_name]['url'], "rest/dataset");
@@ -162,7 +167,6 @@ class CkanApiV1Extractor:
             except:
                 print >> sys.stderr, 'error encountered while fetching data from %s:' % source_name
                 traceback.print_exc(file=sys.stderr)
-                continue
 
             
             print "%s\t%d\t%d\t%d\t%d\t%d" % (
