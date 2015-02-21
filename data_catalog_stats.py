@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #
-# Copyright (C) 2011 Peter Hanecak <hanecak@opendata.sk>
+# Copyright (C) 2011, 2013 - 2015 Peter Hanecak <hanecak@opendata.sk>
 #
 # This file is part of Open Data Node.
 #
