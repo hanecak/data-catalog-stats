@@ -65,6 +65,9 @@ DATA_CATALOGS = {
   'data.gov.ie': {
     'url': 'http://data.gov.ie/api/'
   },
+  'data.gov.ro': {
+    'url': 'http://data.gov.ro/api/'
+  },
   'data.gov.sk': {
     'url': 'http://data.gov.sk/sk/api/'
   },
