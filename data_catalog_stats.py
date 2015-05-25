@@ -92,6 +92,9 @@ DATA_CATALOGS = {
   'www.govdata.de': {
     'url': 'https://www.govdata.de/ckan/api/'
   },
+  'www.opendataphilly.org': {
+    'url': 'http://www.opendataphilly.org/api/'
+  },
   'www.publicdata.eu': {
     'url': 'http://www.publicdata.eu/api/'
   }
