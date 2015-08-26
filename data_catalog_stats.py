@@ -56,16 +56,6 @@ DATA_CATALOGS = {
   'data.gv.at': {
     'url': 'http://www.data.gv.at/katalog/api/'
   },
-  #'data.gov.au': {
-  #  'url': 'http://data.gov.au/api/'
-  #},
-  # As of now, http://cz.ckan.net/ does not work and http://data.gov.cz/
-  # redirects to http://portal.gov.cz/portal/obcan/, there we can find link
-  # to http://portal.gov.cz/portal/obcan/rejstriky/data/ but API ...  is
-  # nowhere to be found.  So, for now this is disabled.
-  #'data.gov.cz': {
-  #  'url': 'http://cz.ckan.net/api/'
-  #},
   'data.gov.ie': {
     'url': 'http://data.gov.ie/api/'
   },
