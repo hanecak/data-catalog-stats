@@ -80,6 +80,9 @@ DATA_CATALOGS = {
   'opendata.hu': {
     'url': 'http://opendata.hu/api/'
   },
+  'opendata.government.bg': {
+    'url': 'http://opendata.government.bg/api/'
+  },
   'www.dati.gov.it': {
     'url': 'http://www.dati.gov.it/catalog/api/'
   },
