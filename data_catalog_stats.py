@@ -83,6 +83,9 @@ DATA_CATALOGS = {
   'opendata.government.bg': {
     'url': 'http://opendata.government.bg/api/'
   },
+  'opendata.praha.eu': {
+    'url': 'http://opendata.praha.eu/api/'
+  },
   'www.dati.gov.it': {
     'url': 'http://www.dati.gov.it/catalog/api/'
   },
