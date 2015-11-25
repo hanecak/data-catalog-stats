@@ -74,9 +74,6 @@ DATA_CATALOGS = {
   'hubofdata.ru': {
     'url': 'http://hubofdata.ru/api/'
   },
-  'ie.ckan.net': {
-    'url': 'http://ie.ckan.net/api/'
-  },
   'opendata.hu': {
     'url': 'http://opendata.hu/api/'
   },
