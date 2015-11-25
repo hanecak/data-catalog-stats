@@ -86,9 +86,10 @@ DATA_CATALOGS = {
   'opendata.praha.eu': {
     'url': 'http://opendata.praha.eu/api/'
   },
-  'www.dati.gov.it': {
-    'url': 'http://www.dati.gov.it/catalog/api/'
-  },
+  # seems like migrated to Drupal, old API no longer woring => disabling for now
+  #'www.dati.gov.it': {
+  #  'url': 'http://www.dati.gov.it/catalog/api/'
+  #},
   'www.europeandataportal.eu': {
     'url': 'http://www.europeandataportal.eu/data/en/api/'
   },
