@@ -89,6 +89,9 @@ DATA_CATALOGS = {
   'www.dati.gov.it': {
     'url': 'http://www.dati.gov.it/catalog/api/'
   },
+  'www.europeandataportal.eu': {
+    'url': 'http://www.europeandataportal.eu/data/en/api/'
+  },
   'www.govdata.de': {
     'url': 'https://www.govdata.de/ckan/api/'
   },
