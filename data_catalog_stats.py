@@ -77,6 +77,9 @@ DATA_CATALOGS = {
   'ie.ckan.net': {
     'url': 'http://ie.ckan.net/api/'
   },
+  'odn.opendata.sk': {
+    'url': 'http://odn.opendata.sk/api/'
+  },
   'opendata.hu': {
     'url': 'http://opendata.hu/api/'
   },
