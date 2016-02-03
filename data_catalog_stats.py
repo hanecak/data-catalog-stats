@@ -86,6 +86,10 @@ DATA_CATALOGS = {
   'opendata.praha.eu': {
     'url': 'http://opendata.praha.eu/api/'
   },
+  # ... but foe now fails with "SSLHandshakeError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:590)"
+  #'opendata.swiss': {
+  #  'url': 'https://opendata.swiss/en/api/'
+  #},
   # seems like migrated to Drupal, old API no longer woring => disabling for now
   #'www.dati.gov.it': {
   #  'url': 'http://www.dati.gov.it/catalog/api/'
