@@ -90,6 +90,10 @@ DATA_CATALOGS = {
   #'opendata.swiss': {
   #  'url': 'https://opendata.swiss/en/api/'
   #},
+  # FIXME: resource count call fails ...
+  'www.data.gov.sg': {
+    'url': 'https://data.gov.sg/api/'
+  },
   # seems like migrated to Drupal, old API no longer woring => disabling for now
   #'www.dati.gov.it': {
   #  'url': 'http://www.dati.gov.it/catalog/api/'
