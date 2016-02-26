@@ -86,7 +86,7 @@ DATA_CATALOGS = {
   'opendata.praha.eu': {
     'url': 'http://opendata.praha.eu/api/'
   },
-  # ... but foe now fails with "SSLHandshakeError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:590)"
+  # ... but for now fails with "SSLHandshakeError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:590)"
   #'opendata.swiss': {
   #  'url': 'https://opendata.swiss/en/api/'
   #},
