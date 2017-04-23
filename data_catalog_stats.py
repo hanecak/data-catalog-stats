@@ -245,6 +245,48 @@ class DataCatalogStats:
                                     ])
     
     
+    def save_csv_all(self):
+        """
+        save all values into series of CSVs
+        """
+
+        import csv
+
+        # prepare column names, i.e. list of data catalogs
+        # FIXME: we might have some older data catalogs present in state but not in 'DATA_CATALOGS' => we need to iterate state to get all data catalog keys
+        sorted_data_catalog_keys = sorted(DATA_CATALOGS.keys())
+        column_names = ['date']
+        column_names.extend(sorted_data_catalog_keys)
+
+        # dump data series
+        for series in ['dataset_count', 'resource_count', 'license_count', 'open_count', 'non_open_count']:
+            with open('data-catalog-stats-all-%s.csv' % series, 'wb') as csvfile:
+                csvwriter = csv.writer(csvfile)
+                csvwriter.writerow(column_names)
+
+                for sample_key in sorted(self.state.keys()):
+                    row = []
+                    row.append(sample_key)
+
+                    (dataset_data, license_data) = self.state[sample_key]
+
+                    for source_name in sorted_data_catalog_keys:
+                        # here, a consequence of dumb premature
+                        # optimization: data split in two tuples and thus
+                        # need for workaround
+                        value = -1
+                        if series in ['open_count', 'non_open_count']:
+                            if source_name in license_data:
+                                value = license_data[source_name][series]
+                        else:
+                            if source_name in dataset_data:
+                                value = dataset_data[source_name][series]
+
+                        row.append(value)
+
+                    csvwriter.writerow(row)
+
+
     def update_data(self):
         # get current data sample
         self.current_data = self.ckan_api_v1_extractor.get_data()
@@ -269,4 +311,5 @@ data_catalog_stats = DataCatalogStats()
 data_catalog_stats.load_state()
 data_catalog_stats.update_data()
 data_catalog_stats.save_csv_current()
+data_catalog_stats.save_csv_all()
 data_catalog_stats.save_state()
