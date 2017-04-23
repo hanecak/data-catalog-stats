@@ -253,8 +253,15 @@ class DataCatalogStats:
         import csv
 
         # prepare column names, i.e. list of data catalogs
-        # FIXME: we might have some older data catalogs present in state but not in 'DATA_CATALOGS' => we need to iterate state to get all data catalog keys
-        sorted_data_catalog_keys = sorted(DATA_CATALOGS.keys())
+        sorted_data_catalog_keys = []
+        for sample_key in sorted(self.state.keys()):
+            (dataset_data, license_data) = self.state[sample_key]
+            for source_name in dataset_data.keys():
+                if source_name not in sorted_data_catalog_keys:
+                    sorted_data_catalog_keys.append(source_name)
+        sorted_data_catalog_keys = sorted(sorted_data_catalog_keys)
+        # in case we want just currently used catalogs
+        #sorted_data_catalog_keys = sorted(DATA_CATALOGS.keys())
         column_names = ['date']
         column_names.extend(sorted_data_catalog_keys)
 
