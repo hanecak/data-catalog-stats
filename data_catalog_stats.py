@@ -110,6 +110,9 @@ DATA_CATALOGS = {
   'www.govdata.de': {
     'url': 'https://www.govdata.de/ckan/api/'
   },
+  'www.hri.fi': {
+    'url': 'http://www.hri.fi/api/'
+  },
   'www.opendataphilly.org': {
     'url': 'https://www.opendataphilly.org/api/'
   },
