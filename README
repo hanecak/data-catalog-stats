@@ -3,6 +3,13 @@ About:
 
 Simple stat gathering tool from some selected data catalogs.
 
+It is used to provide data for:
+
+- simple visualization of dataset counts, see
+  https://hanecak.github.io/viz-data_catalog_stats-dataset_count/
+- reporting about number of dataset on Slovak national data portal,
+  see https://utopia.sk/wiki/pages/viewpage.action?pageId=69730514
+
 
 License:
 --------
