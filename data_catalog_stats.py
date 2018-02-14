@@ -92,10 +92,9 @@ DATA_CATALOGS = {
   'opendata.praha.eu': {
     'url': 'http://opendata.praha.eu/api/'
   },
-  # ... but for now fails with "SSLHandshakeError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:590)"
-  #'opendata.swiss': {
-  #  'url': 'https://opendata.swiss/en/api/'
-  #},
+  'opendata.swiss': {
+    'url': 'https://opendata.swiss/en/api/'
+  },
   # FIXME: resource count call fails ...
   'www.data.gov.sg': {
     'url': 'https://data.gov.sg/api/'
