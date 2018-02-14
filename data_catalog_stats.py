@@ -39,9 +39,10 @@ import traceback
 
 
 DATA_CATALOGS = {
-  'catalogodatos.gub.uy': {
-    'url': 'http://catalogodatos.gub.uy/api/'
-  },
+  # API no longer accessible => disabled
+  #'catalogodatos.gub.uy': {
+  #  'url': 'http://catalogodatos.gub.uy/api/'
+  #},
   'dados.gov.br': {
     'url': 'http://dados.gov.br/api/'
   },
