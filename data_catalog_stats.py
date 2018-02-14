@@ -115,9 +115,6 @@ DATA_CATALOGS = {
   },
   'www.opendataphilly.org': {
     'url': 'https://www.opendataphilly.org/api/'
-  },
-  'www.publicdata.eu': {
-    'url': 'http://www.publicdata.eu/api/'
   }
 }
 
