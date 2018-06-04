@@ -49,6 +49,9 @@ DATA_CATALOGS = {
   'data.comsode.eu': {
     'url': 'http://data.comsode.eu/api/'
   },
+  'data.edincubator.eu': {
+    'url': 'https://data.edincubator.eu/api/'
+  },
   # TODO: taking a long time and then raising:
   #	ValueError: No JSON object could be decoded
   #'data.gov': {
