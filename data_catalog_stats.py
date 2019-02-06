@@ -102,6 +102,9 @@ DATA_CATALOGS = {
   'opendata.swiss': {
     'url': 'https://opendata.swiss/en/api/'
   },
+  'podatki.gov.si': {
+    'url': 'https://podatki.gov.si/api/'
+  },
   # FIXME: resource count call fails ...
   'www.data.gov.sg': {
     'url': 'https://data.gov.sg/api/'
