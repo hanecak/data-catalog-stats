@@ -160,7 +160,7 @@ class CkanApiV1Extractor:
             col_names += col_name + "\t"
         # strip last "\t"
         col_name = col_name[:-1]
-        print col_names
+        logging.info("column names: %s" % col_names)
         
         for source_name in sorted(DATA_CATALOGS.keys()):
             # fill in default values (-1) in case this (ocasionaly) fails
@@ -198,19 +198,19 @@ class CkanApiV1Extractor:
                 data = self._make_request(DATA_CATALOGS[source_name]['url'], "search/dataset", args={'q':'isopen:true'});
                 license_data[source_name]['open_count'] = data['count']
                 license_data[source_name]['non_open_count'] = temp_dataset_count - data['count']
-            except:
-                print >> sys.stderr, 'error encountered while fetching data from %s:' % source_name
-                traceback.print_exc(file=sys.stderr)
+            except Exception as e:
+                logging.error('error encountered while fetching data from %s:' % source_name)
+                logging.exception(e)
 
             
-            print "%s\t%d\t%d\t%d\t%d\t%d" % (
+            logging.info("%s\t%d\t%d\t%d\t%d\t%d" % (
                                               source_name,
                                               dataset_data[source_name]['dataset_count'],
                                               dataset_data[source_name]['resource_count'],
                                               dataset_data[source_name]['license_count'],
                                               license_data[source_name]['open_count'],
                                               license_data[source_name]['non_open_count']
-                                              )
+                                              ))
             
             # print('dataset_data:')
             # print `dataset_data`
@@ -226,11 +226,14 @@ class DataCatalogStats:
         self.state = {}
         self.current_data = ();
         self.ckan_api_v1_extractor = CkanApiV1Extractor()
+        logging.basicConfig(
+            format='%(asctime)s %(levelname)s %(message)s',
+            level=logging.INFO)
     
     
     def load_state(self):
         if not os.path.isfile(STATE_FILE):
-            print 'XXX no previous state found (%s)' % STATE_FILE
+            logging.info('no previous state found (%s)' % STATE_FILE)
             return
         
         state_file = open(STATE_FILE, "rb");
