@@ -34,6 +34,7 @@ import logging
 import os.path
 import pickle
 import requests
+import requests_cache
 from urllib.parse import urljoin
 
 
@@ -222,13 +223,19 @@ class CkanApiV1Extractor:
 
 class DataCatalogStats:
     
+    CACHE_EXPIRE = 3600 # in seconds
+
+
     def __init__(self):
         self.state = {}
         self.current_data = ();
         self.ckan_api_v1_extractor = CkanApiV1Extractor()
+
         logging.basicConfig(
             format='%(asctime)s %(levelname)s %(message)s',
             level=logging.INFO)
+
+        requests_cache.CachedSession(xpire_after=self.CACHE_EXPIRE)
     
     
     def load_state(self):
