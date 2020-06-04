@@ -46,9 +46,6 @@ DATA_CATALOGS = {
   'dados.gov.br': {
     'url': 'http://dados.gov.br/api/'
   },
-  'data.comsode.eu': {
-    'url': 'http://data.comsode.eu/api/'
-  },
   'data.edincubator.eu': {
     'url': 'https://data.edincubator.eu/api/'
   },
