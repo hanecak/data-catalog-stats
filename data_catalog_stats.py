@@ -30,12 +30,11 @@
 # 6) Socrata loader for even more data sources (sites like https://opendata.go.ke/, https://data.sfgov.org/, https://data.cityofchicago.org/, etc.)
 
 import datetime
-import json
+import logging
 import os.path
 import pickle
-from python_rest_client.restful_lib import Connection
-import sys
-import traceback
+import requests
+from urllib.parse import urljoin
 
 
 DATA_CATALOGS = {
@@ -139,10 +138,12 @@ class CkanApiV1Extractor:
         wrapper for rest client and json libraries
         """
         
-        conn = Connection(base_url)
-        # TODO: is "headers" part necessary?
-        response = conn.request_get(resource, args, headers={'Accept':'text/json'})
-        data = json.loads(response['body'])
+        url = urljoin(base_url, resource)
+        r = requests.get(url)
+        if r.status_code != 200:
+            raise RuntimeError('error making request: {0}'.format(r.content))
+
+        data = r.json()
         return data
     
     
