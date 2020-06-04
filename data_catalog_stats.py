@@ -117,9 +117,6 @@ DATA_CATALOGS = {
   #'www.europeandataportal.eu': {
   #  'url': 'http://www.europeandataportal.eu/data/en/api/'
   #},
-  'www.govdata.de': {
-    'url': 'https://www.govdata.de/ckan/api/'
-  },
   'www.hri.fi': {
     'url': 'http://www.hri.fi/api/'
   },
