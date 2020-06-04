@@ -30,12 +30,12 @@
 # 6) Socrata loader for even more data sources (sites like https://opendata.go.ke/, https://data.sfgov.org/, https://data.cityofchicago.org/, etc.)
 
 import datetime
-import json
+import logging
 import os.path
 import pickle
-from python_rest_client.restful_lib import Connection
-import sys
-import traceback
+import requests
+import requests_cache
+from urllib.parse import urljoin
 
 
 DATA_CATALOGS = {
@@ -45,9 +45,6 @@ DATA_CATALOGS = {
   #},
   'dados.gov.br': {
     'url': 'http://dados.gov.br/api/'
-  },
-  'data.comsode.eu': {
-    'url': 'http://data.comsode.eu/api/'
   },
   'data.edincubator.eu': {
     'url': 'https://data.edincubator.eu/api/'
@@ -64,10 +61,7 @@ DATA_CATALOGS = {
     'url': 'http://data.gov.ie/api/'
   },
   'data.gov.ro': {
-    'url': 'http://data.gov.ro/api/'
-  },
-  'data.gov.si': {
-    'url': 'https://data.gov.si/api'
+    'url': 'https://data.gov.ro/api/'
   },
   'data.gov.sk': {
     'url': 'https://data.gov.sk/sk/api/'
@@ -75,33 +69,39 @@ DATA_CATALOGS = {
   'data.gov.ua': {
     'url': 'https://data.gov.ua/api/'
   },
-  'data.gov.uk': {
-    'url': 'http://data.gov.uk/api/'
-  },
+  # TODO: there is still CKAN at https://ckan.publishing.service.gov.uk/ but API is not accessible or not at "default" location
+  #'data.gov.uk': {
+  #  'url': 'http://data.gov.uk/api/'
+  #},
   'datahub.io': {
     'url': 'http://datahub.io/api/'
   },
-  'energydata.info': {
-    'url': 'https://energydata.info/api'
-  },
-  'hubofdata.ru': {
-    'url': 'http://hubofdata.ru/api/'
-  },
+  # TODO: API is still there, but apart from version check nothing works
+  #'energydata.info': {
+  #  'url': 'https://energydata.info/api/'
+  #},
+  # TODO: still a CKAN, but API not reachable
+  #'hubofdata.ru': {
+  #  'url': 'http://hubofdata.ru/api/'
+  #},
   'odn.opendata.sk': {
     'url': 'http://odn.opendata.sk/api/'
   },
   'opendata.hu': {
     'url': 'http://opendata.hu/api/'
   },
-  'opendata.government.bg': {
-    'url': 'http://opendata.government.bg/api/'
-  },
-  'opendata.praha.eu': {
-    'url': 'http://opendata.praha.eu/api/'
-  },
-  'opendata.swiss': {
-    'url': 'https://opendata.swiss/en/api/'
-  },
+  # TODO: new URL, but API not available there
+  #'opendata.government.bg': {
+  #  'url': 'http://data.egov.bg/api/'
+  #},
+  # TODO: API is still there, but apart from version check nothing works
+  #'opendata.praha.eu': {
+  #  'url': 'http://opendata.praha.eu/api/'
+  #},
+  # TODO: API is still there, but apart from version check nothing works
+  #'opendata.swiss': {
+  #  'url': 'https://opendata.swiss/en/api/'
+  #},
   'podatki.gov.si': {
     'url': 'https://podatki.gov.si/api/'
   },
@@ -109,40 +109,53 @@ DATA_CATALOGS = {
   'www.data.gov.sg': {
     'url': 'https://data.gov.sg/api/'
   },
-  # seems like migrated to Drupal, old API no longer woring => disabling for now
+  # seems like migrated to Drupal, old API no longer working => disabling for now
   #'www.dati.gov.it': {
   #  'url': 'http://www.dati.gov.it/catalog/api/'
   #},
-  'www.europeandataportal.eu': {
-    'url': 'http://www.europeandataportal.eu/data/en/api/'
-  },
-  'www.govdata.de': {
-    'url': 'https://www.govdata.de/ckan/api/'
-  },
-  'www.hri.fi': {
-    'url': 'http://www.hri.fi/api/'
-  },
-  'www.opendataphilly.org': {
-    'url': 'https://www.opendataphilly.org/api/'
-  }
+  # TODO: implement "getter" for their API, see https://www.europeandataportal.eu/data/api/
+  #'www.europeandataportal.eu': {
+  #  'url': 'http://www.europeandataportal.eu/data/en/api/'
+  #},
+  # TODO: do a "custom getter" to get at least dataset count from HTML page
+  #'www.hri.fi': {
+  #  'url': 'https://hri.fi/en_gb/'
+  #},
+  # TODO: API is still there, but apart from version check nothing works
+  #'www.opendataphilly.org': {
+  #  'url': 'https://www.opendataphilly.org/api/'
+  #}
 }
 
 STATE_FILE = 'data-catalog-stats.state'
 
-COLUMN_NAMES = [ "source", "dataset_count", "resource_count", "license_count(total)", "open_license_count", "non_open_license_count" ]
+COLUMN_NAMES = [
+    "source",
+    "dataset_count",
+    "resource_count",
+    "license_count(total)",
+    "open_license_count",
+    "non_open_license_count"
+    ]
 
 
 class CkanApiV1Extractor:
     
+    def __init__(self, requests_session):
+        self.requests_session = requests_session
+
+
     def _make_request(self, base_url, resource, args=None):
         """
         wrapper for rest client and json libraries
         """
         
-        conn = Connection(base_url)
-        # TODO: is "headers" part necessary?
-        response = conn.request_get(resource, args, headers={'Accept':'text/json'})
-        data = json.loads(response['body'])
+        url = urljoin(base_url, resource)
+        r = self.requests_session.get(url)
+        if r.status_code != 200:
+            raise RuntimeError('error making request: non-OK response code: {0}'.format(r.status_code))
+
+        data = r.json()
         return data
     
     
@@ -159,7 +172,7 @@ class CkanApiV1Extractor:
             col_names += col_name + "\t"
         # strip last "\t"
         col_name = col_name[:-1]
-        print col_names
+        logging.info("column names: %s" % col_names)
         
         for source_name in sorted(DATA_CATALOGS.keys()):
             # fill in default values (-1) in case this (ocasionaly) fails
@@ -197,19 +210,19 @@ class CkanApiV1Extractor:
                 data = self._make_request(DATA_CATALOGS[source_name]['url'], "search/dataset", args={'q':'isopen:true'});
                 license_data[source_name]['open_count'] = data['count']
                 license_data[source_name]['non_open_count'] = temp_dataset_count - data['count']
-            except:
-                print >> sys.stderr, 'error encountered while fetching data from %s:' % source_name
-                traceback.print_exc(file=sys.stderr)
+            except Exception as e:
+                logging.error('error encountered while fetching data from %s:' % source_name)
+                logging.exception(e)
 
             
-            print "%s\t%d\t%d\t%d\t%d\t%d" % (
+            logging.info("%s\t%d\t%d\t%d\t%d\t%d" % (
                                               source_name,
                                               dataset_data[source_name]['dataset_count'],
                                               dataset_data[source_name]['resource_count'],
                                               dataset_data[source_name]['license_count'],
                                               license_data[source_name]['open_count'],
                                               license_data[source_name]['non_open_count']
-                                              )
+                                              ))
             
             # print('dataset_data:')
             # print `dataset_data`
@@ -221,15 +234,26 @@ class CkanApiV1Extractor:
 
 class DataCatalogStats:
     
+    CACHE_EXPIRE = 3600 # in seconds, use 0 for "no cache"
+
+
     def __init__(self):
+        logging.basicConfig(
+            format='%(asctime)s %(levelname)s %(message)s',
+            level=logging.DEBUG)
+
+        self.requests_session = requests.Session()
+        if self.CACHE_EXPIRE > 0:
+            self.requests_session = requests_cache.CachedSession(xpire_after=self.CACHE_EXPIRE)
+
         self.state = {}
         self.current_data = ();
-        self.ckan_api_v1_extractor = CkanApiV1Extractor()
+        self.ckan_api_v1_extractor = CkanApiV1Extractor(self.requests_session)
     
     
     def load_state(self):
         if not os.path.isfile(STATE_FILE):
-            print 'XXX no previous state found (%s)' % STATE_FILE
+            logging.info('no previous state found (%s)' % STATE_FILE)
             return
         
         state_file = open(STATE_FILE, "rb");
@@ -243,7 +267,7 @@ class DataCatalogStats:
         
         import csv
         
-        with open('data-catalog-stats-current.csv', 'wb') as csvfile:
+        with open('data-catalog-stats-current.csv', 'w') as csvfile:
             csvwriter = csv.writer(csvfile)
             csvwriter.writerow(COLUMN_NAMES)
             
@@ -283,7 +307,7 @@ class DataCatalogStats:
 
         # dump data series
         for series in ['dataset_count', 'resource_count', 'license_count', 'open_count', 'non_open_count']:
-            with open('data-catalog-stats-all-%s.csv' % series, 'wb') as csvfile:
+            with open('data-catalog-stats-all-%s.csv' % series, 'w') as csvfile:
                 csvwriter = csv.writer(csvfile)
                 csvwriter.writerow(column_names)
 
