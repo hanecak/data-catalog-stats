@@ -97,9 +97,10 @@ DATA_CATALOGS = {
   #'opendata.government.bg': {
   #  'url': 'http://data.egov.bg/api/'
   #},
-  'opendata.praha.eu': {
-    'url': 'http://opendata.praha.eu/api/'
-  },
+  # TODO: API is still there, but apart from version check nothing works
+  #'opendata.praha.eu': {
+  #  'url': 'http://opendata.praha.eu/api/'
+  #},
   'opendata.swiss': {
     'url': 'https://opendata.swiss/en/api/'
   },
