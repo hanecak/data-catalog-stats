@@ -129,14 +129,14 @@ DATA_CATALOGS = {
 
 STATE_FILE = 'data-catalog-stats.state'
 
-COLUMN_NAMES = {
+COLUMN_NAMES = [
     "source",
     "dataset_count",
     "resource_count",
     "license_count(total)",
     "open_license_count",
     "non_open_license_count"
-    }
+    ]
 
 
 class CkanApiV1Extractor:
@@ -267,7 +267,7 @@ class DataCatalogStats:
         
         import csv
         
-        with open('data-catalog-stats-current.csv', 'wb') as csvfile:
+        with open('data-catalog-stats-current.csv', 'w') as csvfile:
             csvwriter = csv.writer(csvfile)
             csvwriter.writerow(COLUMN_NAMES)
             
@@ -307,7 +307,7 @@ class DataCatalogStats:
 
         # dump data series
         for series in ['dataset_count', 'resource_count', 'license_count', 'open_count', 'non_open_count']:
-            with open('data-catalog-stats-all-%s.csv' % series, 'wb') as csvfile:
+            with open('data-catalog-stats-all-%s.csv' % series, 'w') as csvfile:
                 csvwriter = csv.writer(csvfile)
                 csvwriter.writerow(column_names)
 
