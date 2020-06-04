@@ -79,9 +79,10 @@ DATA_CATALOGS = {
   'datahub.io': {
     'url': 'http://datahub.io/api/'
   },
-  'energydata.info': {
-    'url': 'https://energydata.info/api'
-  },
+  # TODO: API is still there, but apart from version check nothing works
+  #'energydata.info': {
+  #  'url': 'https://energydata.info/api/'
+  #},
   'hubofdata.ru': {
     'url': 'http://hubofdata.ru/api/'
   },
