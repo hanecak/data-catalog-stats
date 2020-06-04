@@ -93,7 +93,7 @@ DATA_CATALOGS = {
   'opendata.hu': {
     'url': 'http://opendata.hu/api/'
   },
-  # TODO: new URL, but API not available thre
+  # TODO: new URL, but API not available there
   #'opendata.government.bg': {
   #  'url': 'http://data.egov.bg/api/'
   #},
@@ -101,9 +101,10 @@ DATA_CATALOGS = {
   #'opendata.praha.eu': {
   #  'url': 'http://opendata.praha.eu/api/'
   #},
-  'opendata.swiss': {
-    'url': 'https://opendata.swiss/en/api/'
-  },
+  # TODO: API is still there, but apart from version check nothing works
+  #'opendata.swiss': {
+  #  'url': 'https://opendata.swiss/en/api/'
+  #},
   'podatki.gov.si': {
     'url': 'https://podatki.gov.si/api/'
   },
