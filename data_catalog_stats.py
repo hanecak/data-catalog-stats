@@ -72,9 +72,10 @@ DATA_CATALOGS = {
   'data.gov.ua': {
     'url': 'https://data.gov.ua/api/'
   },
-  'data.gov.uk': {
-    'url': 'http://data.gov.uk/api/'
-  },
+  # TODO: there is still CKAN at https://ckan.publishing.service.gov.uk/ but API is not accessible or not at "default" location
+  #'data.gov.uk': {
+  #  'url': 'http://data.gov.uk/api/'
+  #},
   'datahub.io': {
     'url': 'http://datahub.io/api/'
   },
