@@ -117,9 +117,10 @@ DATA_CATALOGS = {
   #'www.europeandataportal.eu': {
   #  'url': 'http://www.europeandataportal.eu/data/en/api/'
   #},
-  'www.hri.fi': {
-    'url': 'http://www.hri.fi/api/'
-  },
+  # TODO: do a "custom getter" to get at least dataset count from HTML page
+  #'www.hri.fi': {
+  #  'url': 'https://hri.fi/en_gb/'
+  #},
   'www.opendataphilly.org': {
     'url': 'https://www.opendataphilly.org/api/'
   }
