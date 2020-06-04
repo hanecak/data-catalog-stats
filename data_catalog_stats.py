@@ -83,9 +83,10 @@ DATA_CATALOGS = {
   #'energydata.info': {
   #  'url': 'https://energydata.info/api/'
   #},
-  'hubofdata.ru': {
-    'url': 'http://hubofdata.ru/api/'
-  },
+  # TODO: still a CKAN, but API not reachable
+  #'hubofdata.ru': {
+  #  'url': 'http://hubofdata.ru/api/'
+  #},
   'odn.opendata.sk': {
     'url': 'http://odn.opendata.sk/api/'
   },
