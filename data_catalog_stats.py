@@ -121,9 +121,10 @@ DATA_CATALOGS = {
   #'www.hri.fi': {
   #  'url': 'https://hri.fi/en_gb/'
   #},
-  'www.opendataphilly.org': {
-    'url': 'https://www.opendataphilly.org/api/'
-  }
+  # TODO: API is still there, but apart from version check nothing works
+  #'www.opendataphilly.org': {
+  #  'url': 'https://www.opendataphilly.org/api/'
+  #}
 }
 
 STATE_FILE = 'data-catalog-stats.state'
