@@ -93,9 +93,10 @@ DATA_CATALOGS = {
   'opendata.hu': {
     'url': 'http://opendata.hu/api/'
   },
-  'opendata.government.bg': {
-    'url': 'http://opendata.government.bg/api/'
-  },
+  # TODO: new URL, but API not available thre
+  #'opendata.government.bg': {
+  #  'url': 'http://data.egov.bg/api/'
+  #},
   'opendata.praha.eu': {
     'url': 'http://opendata.praha.eu/api/'
   },
