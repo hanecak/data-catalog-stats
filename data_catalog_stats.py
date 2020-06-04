@@ -109,7 +109,7 @@ DATA_CATALOGS = {
   'www.data.gov.sg': {
     'url': 'https://data.gov.sg/api/'
   },
-  # seems like migrated to Drupal, old API no longer woring => disabling for now
+  # seems like migrated to Drupal, old API no longer working => disabling for now
   #'www.dati.gov.it': {
   #  'url': 'http://www.dati.gov.it/catalog/api/'
   #},
@@ -153,7 +153,7 @@ class CkanApiV1Extractor:
         url = urljoin(base_url, resource)
         r = self.requests_session.get(url)
         if r.status_code != 200:
-            raise RuntimeError('error making request: {0}'.format(r.content))
+            raise RuntimeError('error making request: non-OK response code: {0}'.format(r.status_code))
 
         data = r.json()
         return data
@@ -240,7 +240,7 @@ class DataCatalogStats:
     def __init__(self):
         logging.basicConfig(
             format='%(asctime)s %(levelname)s %(message)s',
-            level=logging.INFO)
+            level=logging.DEBUG)
 
         self.requests_session = requests.Session()
         if self.CACHE_EXPIRE > 0:
