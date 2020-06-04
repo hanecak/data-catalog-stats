@@ -46,9 +46,6 @@ DATA_CATALOGS = {
   'dados.gov.br': {
     'url': 'http://dados.gov.br/api/'
   },
-  'data.comsode.eu': {
-    'url': 'http://data.comsode.eu/api/'
-  },
   'data.edincubator.eu': {
     'url': 'https://data.edincubator.eu/api/'
   },
@@ -64,10 +61,7 @@ DATA_CATALOGS = {
     'url': 'http://data.gov.ie/api/'
   },
   'data.gov.ro': {
-    'url': 'http://data.gov.ro/api/'
-  },
-  'data.gov.si': {
-    'url': 'https://data.gov.si/api'
+    'url': 'https://data.gov.ro/api/'
   },
   'data.gov.sk': {
     'url': 'https://data.gov.sk/sk/api/'
@@ -75,33 +69,39 @@ DATA_CATALOGS = {
   'data.gov.ua': {
     'url': 'https://data.gov.ua/api/'
   },
-  'data.gov.uk': {
-    'url': 'http://data.gov.uk/api/'
-  },
+  # TODO: there is still CKAN at https://ckan.publishing.service.gov.uk/ but API is not accessible or not at "default" location
+  #'data.gov.uk': {
+  #  'url': 'http://data.gov.uk/api/'
+  #},
   'datahub.io': {
     'url': 'http://datahub.io/api/'
   },
-  'energydata.info': {
-    'url': 'https://energydata.info/api'
-  },
-  'hubofdata.ru': {
-    'url': 'http://hubofdata.ru/api/'
-  },
+  # TODO: API is still there, but apart from version check nothing works
+  #'energydata.info': {
+  #  'url': 'https://energydata.info/api/'
+  #},
+  # TODO: still a CKAN, but API not reachable
+  #'hubofdata.ru': {
+  #  'url': 'http://hubofdata.ru/api/'
+  #},
   'odn.opendata.sk': {
     'url': 'http://odn.opendata.sk/api/'
   },
   'opendata.hu': {
     'url': 'http://opendata.hu/api/'
   },
-  'opendata.government.bg': {
-    'url': 'http://opendata.government.bg/api/'
-  },
-  'opendata.praha.eu': {
-    'url': 'http://opendata.praha.eu/api/'
-  },
-  'opendata.swiss': {
-    'url': 'https://opendata.swiss/en/api/'
-  },
+  # TODO: new URL, but API not available there
+  #'opendata.government.bg': {
+  #  'url': 'http://data.egov.bg/api/'
+  #},
+  # TODO: API is still there, but apart from version check nothing works
+  #'opendata.praha.eu': {
+  #  'url': 'http://opendata.praha.eu/api/'
+  #},
+  # TODO: API is still there, but apart from version check nothing works
+  #'opendata.swiss': {
+  #  'url': 'https://opendata.swiss/en/api/'
+  #},
   'podatki.gov.si': {
     'url': 'https://podatki.gov.si/api/'
   },
@@ -113,18 +113,18 @@ DATA_CATALOGS = {
   #'www.dati.gov.it': {
   #  'url': 'http://www.dati.gov.it/catalog/api/'
   #},
-  'www.europeandataportal.eu': {
-    'url': 'http://www.europeandataportal.eu/data/en/api/'
-  },
-  'www.govdata.de': {
-    'url': 'https://www.govdata.de/ckan/api/'
-  },
-  'www.hri.fi': {
-    'url': 'http://www.hri.fi/api/'
-  },
-  'www.opendataphilly.org': {
-    'url': 'https://www.opendataphilly.org/api/'
-  }
+  # TODO: implement "getter" for their API, see https://www.europeandataportal.eu/data/api/
+  #'www.europeandataportal.eu': {
+  #  'url': 'http://www.europeandataportal.eu/data/en/api/'
+  #},
+  # TODO: do a "custom getter" to get at least dataset count from HTML page
+  #'www.hri.fi': {
+  #  'url': 'https://hri.fi/en_gb/'
+  #},
+  # TODO: API is still there, but apart from version check nothing works
+  #'www.opendataphilly.org': {
+  #  'url': 'https://www.opendataphilly.org/api/'
+  #}
 }
 
 STATE_FILE = 'data-catalog-stats.state'
