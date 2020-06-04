@@ -1,2 +1,4 @@
 data-catalog-stats.state
 *.csv
+cache.sqlite
+.venv

@@ -129,18 +129,29 @@ DATA_CATALOGS = {
 
 STATE_FILE = 'data-catalog-stats.state'
 
-COLUMN_NAMES = [ "source", "dataset_count", "resource_count", "license_count(total)", "open_license_count", "non_open_license_count" ]
+COLUMN_NAMES = {
+    "source",
+    "dataset_count",
+    "resource_count",
+    "license_count(total)",
+    "open_license_count",
+    "non_open_license_count"
+    }
 
 
 class CkanApiV1Extractor:
     
+    def __init__(self, requests_session):
+        self.requests_session = requests_session
+
+
     def _make_request(self, base_url, resource, args=None):
         """
         wrapper for rest client and json libraries
         """
         
         url = urljoin(base_url, resource)
-        r = requests.get(url)
+        r = self.requests_session.get(url)
         if r.status_code != 200:
             raise RuntimeError('error making request: {0}'.format(r.content))
 
@@ -223,19 +234,21 @@ class CkanApiV1Extractor:
 
 class DataCatalogStats:
     
-    CACHE_EXPIRE = 3600 # in seconds
+    CACHE_EXPIRE = 3600 # in seconds, use 0 for "no cache"
 
 
     def __init__(self):
-        self.state = {}
-        self.current_data = ();
-        self.ckan_api_v1_extractor = CkanApiV1Extractor()
-
         logging.basicConfig(
             format='%(asctime)s %(levelname)s %(message)s',
             level=logging.INFO)
 
-        requests_cache.CachedSession(xpire_after=self.CACHE_EXPIRE)
+        self.requests_session = requests.Session()
+        if self.CACHE_EXPIRE > 0:
+            self.requests_session = requests_cache.CachedSession(xpire_after=self.CACHE_EXPIRE)
+
+        self.state = {}
+        self.current_data = ();
+        self.ckan_api_v1_extractor = CkanApiV1Extractor(self.requests_session)
     
     
     def load_state(self):
